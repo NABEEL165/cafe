@@ -1,0 +1,191 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <title>Our Food Specialties</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-image: url("{% static 'image/pexels-pixabay-260922.jpg' %}");
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-position: center;
+      font-family: 'Poppins', sans-serif;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      background: rgba(0, 0, 0, 0.55);
+      text-align: center;
+      padding: 2.5rem 1rem;
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+      border-radius: 0 0 20px 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    }
+
+    header h1 {
+      font-size: 3rem;
+      color: #ffce63;
+      margin-bottom: 0.5rem;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+    }
+
+    header p {
+      font-size: 1.2rem;
+      color: #f3f3f3;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 3rem auto;
+      padding: 0 1rem;
+    }
+
+    .specialties {
+      display: flex;
+      flex-direction: column;
+      gap: 1.8rem;
+    }
+
+    /* Horizontal Card Style */
+    .food-card {
+      display: flex;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(12px);
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.15);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.4), inset 0 1px 6px rgba(255,255,255,0.1);
+      overflow: hidden;
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .food-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.65);
+    }
+
+    .food-card img {
+      width: 220px;
+      height: 180px;
+      object-fit: cover;
+      flex-shrink: 0;
+      border-right: 2px solid rgba(255,255,255,0.2);
+      transition: transform 0.4s ease;
+    }
+
+    .food-card:hover img {
+      transform: scale(1.05);
+    }
+
+    .content {
+      padding: 1rem 1.5rem;
+      flex: 1;
+    }
+
+    .content h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.4rem;
+      color: #ffe57f;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
+    }
+
+    .content p {
+      font-size: 0.9rem;
+      color: #f0f0f0;
+      margin-bottom: 0.6rem;
+      line-height: 1.4;
+    }
+
+    .price {
+      font-weight: 700;
+      font-size: 1rem;
+      color: #8affb8;
+      text-shadow: 1px 1px 6px rgba(0,0,0,0.6);
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      background: rgba(0, 0, 0, 0.55);
+      color: #ccc;
+      font-size: 0.9rem;
+      margin-top: auto;
+      backdrop-filter: blur(10px);
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .ok-btn {
+      background: rgba(255, 206, 99, 0.9);
+      color: #222;
+      padding: 10px 22px;
+      font-size: 14px;
+      font-weight: 700;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.35), inset 0 2px 5px rgba(255,255,255,0.4);
+      margin-bottom: 15px;
+    }
+
+    .ok-btn:hover {
+      background: rgba(255, 200, 50, 1);
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.55);
+    }
+
+    .ok-btn:active {
+      transform: scale(0.96);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="/" style="text-decoration: none;">
+      <button type="button" class="ok-btn">⬅ Back to Home</button>
+    </a>
+    <h1>Our Special Dishes</h1>
+    <p>Fresh, Authentic & Delicious</p>
+  </header>
+
+  <div class="container">
+    <div class="specialties">
+      {% for item in specialties %}
+      <div class="food-card">
+        <a href="/book/">
+          <img src="{{ item.image.url }}" alt="{{ item.name }}">
+        </a>
+        <div class="content">
+          <h3>{{ item.name }}</h3>
+          <p>{{ item.description }}</p>
+          <div class="price">₹{{ item.price }}</div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 Your Food Brand. All Rights Reserved.
+  </footer>
+
+</body>
+</html>

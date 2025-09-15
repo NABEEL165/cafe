@@ -1,0 +1,202 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <title>Book Your Table</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 40px 20px;
+      background-image: url("{% static 'image/1548faf9927f0f7e019cff958e113cbd.jpg' %}");
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-position: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .booking-container {
+      max-width: 500px;
+      width: 100%;
+      padding: 30px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.12);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+      backdrop-filter: blur(12px) saturate(150%);
+      -webkit-backdrop-filter: blur(12px) saturate(150%);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .booking-container:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    h2 {
+      text-align: center;
+      color: #f5cc16;
+      margin-bottom: 25px;
+    }
+
+    form label {
+      font-weight: 600;
+      margin-bottom: 6px;
+      display: block;
+      color: #fff;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      color: #fff;
+      font-size: 15px;
+    }
+
+    input::placeholder, select {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    input:focus, select:focus {
+      border-color: #f5cc16;
+      outline: none;
+      box-shadow: 0 0 8px rgba(245, 204, 22, 0.6);
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(135deg, #4F46E5, #6D28D9);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(79, 70, 229, 0.5);
+    }
+
+    .btn-submit:hover {
+      background: linear-gradient(135deg, #4338CA, #5B21B6);
+      transform: scale(1.03);
+      box-shadow: 0 6px 25px rgba(79, 70, 229, 0.7);
+    }
+
+    .ok-btn {
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: 600;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+      margin-bottom: 20px;
+      text-decoration: none;
+      display: inline-block;
+      backdrop-filter: blur(8px);
+    }
+
+    .ok-btn:hover {
+      background: rgba(255, 255, 255, 0.25);
+      transform: scale(1.03);
+    }
+
+    .alert {
+      padding: 12px;
+      background: rgba(40, 167, 69, 0.2);
+      color: #d4edda;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      text-align: center;
+      border: 1px solid rgba(40, 167, 69, 0.4);
+      backdrop-filter: blur(6px);
+    }
+  </style>
+</head>
+<body>
+
+  <a href="/" class="ok-btn">← Back to Home</a>
+
+  <div class="booking-container">
+    <h2>Book Your Table</h2>
+
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+
+    <form method="POST" id="bookingForm">
+      {% csrf_token %}
+      <label for="name">Full Name</label>
+      <input type="text" name="name" id="name" placeholder="Enter your name" required>
+
+      <label for="email">Email Address</label>
+      <input type="email" name="email" id="email" placeholder="example@email.com" required>
+
+      <label for="phone">Phone Number</label>
+      <input type="text" name="phone" id="phone" placeholder="+91 98765 43210" required>
+
+      <label for="date">Date</label>
+      <input type="date" name="date" id="date" required>
+
+      <label for="time">Time</label>
+      <input type="time" name="time" id="time" required>
+
+      <label for="guests">Number of Guests</label>
+      <select name="guests" id="guests" required>
+        <option value="">Select</option>
+        <option value="1">1 Guest</option>
+        <option value="2">2 Guests</option>
+        <option value="3">3 Guests</option>
+        <option value="4">4 Guests</option>
+        <option value="5">5 Guests</option>
+        <option value="6+">6+ Guests</option>
+      </select>
+
+      <button type="submit" class="btn-submit" id="submitBtn">Book Now</button>
+    </form>
+  </div>
+
+  <!-- Voice script -->
+  <script>
+    document.getElementById('bookingForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const msg = new SpeechSynthesisUtterance("Your table booking request has been submitted.");
+      msg.lang = "en-US";
+
+      msg.onend = function() {
+        document.getElementById('bookingForm').submit();
+      };
+
+      speechSynthesis.speak(msg);
+    });
+  </script>
+
+</body>
+</html>

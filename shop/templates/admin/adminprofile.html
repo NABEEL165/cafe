@@ -1,0 +1,86 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <title>Admin Profile</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: url("{% static 'image/7161378aac840a72cab4ab3fc324a6d5.jpg' %}") no-repeat center center fixed;
+      background-size: cover;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      backdrop-filter: blur(4px);
+    }
+
+    .profile-container {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      width: 90%;
+      max-width: 480px;
+      text-align: center;
+    }
+
+    h2 {
+      color: #ffffff;
+      margin-bottom: 25px;
+      font-size: 28px;
+    }
+
+    .profile-info {
+      font-size: 16px;
+      color: #f0f0f0;
+      margin-bottom: 30px;
+      line-height: 1.6;
+    }
+
+    .btn {
+      display: inline-block;
+      margin: 10px 6px;
+      padding: 10px 22px;
+      background: linear-gradient(to right, #6b3e26, #8b5e3c);
+      color: #ffffff;
+      border: none;
+      border-radius: 10px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease-in-out;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .btn:hover {
+      background: linear-gradient(to right, #8b5e3c, #6b3e26);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+    }
+  </style>
+</head>
+<body>
+  <div class="profile-container">
+    <h2>👤 Admin Profile</h2>
+
+    <div class="profile-info">
+      <p><strong>Username:</strong> {{ user.username }}</p>
+      <p><strong>Email:</strong> {{ user.email }}</p>
+      <p><strong>Role:</strong> Admin</p>
+    </div>
+
+    <a href="/usercontact/" class="btn">🏠 User Contact</a>
+    <a href="/userbooking/" class="btn">📅 User Bookings</a>
+    <a href="/logout/" class="btn">🚪 Logout</a>
+  </div>
+</body>
+</html>
